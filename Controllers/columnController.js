@@ -1,18 +1,15 @@
 const Column = require('../Models/columnModel');
 
-// Create a new column
 exports.createColumn = async (req, res) => {
     try {
         const { boardId, title } = req.body;
 
-        // Count existing columns to determine next order
         const count = await Column.countDocuments({ boardId });
 
         const newColumn = new Column({
             boardId,
             title,
-            order: count, // Next order in sequence
-        });
+            order: count,         });
 
         await newColumn.save();
         res.status(201).json(newColumn);
@@ -22,7 +19,6 @@ exports.createColumn = async (req, res) => {
     }
 };
 
-// Get all columns for a specific board, sorted by order
 exports.getColumnsByBoard = async (req, res) => {
     try {
         const { boardId } = req.params;
@@ -35,7 +31,6 @@ exports.getColumnsByBoard = async (req, res) => {
     }
 };
 
-// Update a column's title
 exports.updateColumn = async (req, res) => {
     try {
         const { id } = req.params;
@@ -54,7 +49,6 @@ exports.updateColumn = async (req, res) => {
     }
 };
 
-// Delete a column by ID
 exports.deleteColumn = async (req, res) => {
     try {
         const { id } = req.params;
@@ -72,10 +66,9 @@ exports.deleteColumn = async (req, res) => {
     }
 };
 
-// Reorder columns (for drag-and-drop)
 exports.reorderColumns = async (req, res) => {
     try {
-        const { updates } = req.body; // Expects: [{ _id, order }, ...]
+        const { updates } = req.body; 
 
         for (const { _id, order } of updates) {
             await Column.findByIdAndUpdate(_id, { order });

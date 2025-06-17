@@ -1,6 +1,5 @@
 const Task = require('../Models/taskModel');
 
-// Create a task
 exports.createTask = async (req, res) => {
   try {
     const { content, columnId } = req.body;
@@ -11,7 +10,6 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// Get all tasks by column
 exports.getTasksByColumn = async (req, res) => {
   try {
     const { columnId } = req.params;
@@ -22,7 +20,6 @@ exports.getTasksByColumn = async (req, res) => {
   }
 };
 
-// Update a task
 exports.updateTask = async (req, res) => {
   try {
     const { id } = req.params;
@@ -33,7 +30,6 @@ exports.updateTask = async (req, res) => {
   }
 };
 
-// Delete a task
 exports.deleteTask = async (req, res) => {
   try {
     const { id } = req.params;
@@ -44,7 +40,6 @@ exports.deleteTask = async (req, res) => {
   }
 };
 
-// Reorder tasks across columns
 exports.reorderTasks = async (req, res) => {
   try {
     const { tasksByColumn } = req.body;
